@@ -1,0 +1,47 @@
+<div class="login-container">
+  <mat-card class="login-card">
+
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formulario" (ngSubmit)="login()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Usuario" />
+          @if (usernameControl?.invalid && usernameControl?.touched) {
+            <mat-error>El usuario es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Contraseña" />
+          @if (passwordControl?.invalid && passwordControl?.touched) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          }
+        </mat-form-field>
+
+        @if (error) {
+          <p class="error-msg">{{ error }}</p>
+        }
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width">
+          @if (cargando) {
+            <mat-spinner diameter="20" />
+          } @else {
+            Entrar
+          }
+        </button>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>

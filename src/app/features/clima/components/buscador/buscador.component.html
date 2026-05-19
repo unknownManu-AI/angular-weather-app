@@ -1,0 +1,69 @@
+<div class="buscador-container">
+  <div class="buscador-hero">
+    <h1>🌤 App del Clima</h1>
+    <p>Busca el clima de cualquier ciudad del mundo</p>
+
+    <div class="buscador-form">
+      <mat-form-field appearance="outline" class="buscador-input">
+        <mat-label>Ciudad</mat-label>
+        <input
+          matInput
+          [formControl]="busqueda"
+          placeholder="Ej: Santiago, Madrid, Buenos Aires..."
+          (keyup.enter)="buscar()"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="busqueda.invalid" (click)="buscar()">
+        Buscar
+      </button>
+    </div>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="usarUbicacion()"
+      [disabled]="cargandoUbicacion()"
+    >
+      @if (cargandoUbicacion()) {
+        <mat-spinner diameter="20" />
+      } @else {
+        <ng-container matButtonIcon>
+          <mat-icon>my_location</mat-icon>
+          Usar mi ubicación
+        </ng-container>
+      }
+    </button>
+  </div>
+
+  @if (favoritos.length > 0) {
+    <div class="favoritos-section">
+      <h2>
+        <mat-icon>star</mat-icon>
+        Ciudades favoritas
+      </h2>
+
+      <div class="favoritos-grid">
+        @for (favorito of favoritos; track favorito.id) {
+          <mat-card class="favorito-card" (click)="irAFavorito(favorito)">
+            <mat-card-content>
+              <div class="favorito-info">
+                <span class="favorito-nombre">{{ favorito.nombre }}</span>
+                <span class="favorito-pais">{{ favorito.pais }}</span>
+              </div>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="eliminarFavorito(favorito.id, $event)"
+                matTooltip="Eliminar favorito"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+  }
+</div>

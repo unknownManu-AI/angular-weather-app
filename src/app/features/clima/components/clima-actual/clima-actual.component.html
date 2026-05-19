@@ -1,0 +1,108 @@
+@if (cargando()) {
+  <div class="spinner-container">
+    <mat-spinner />
+  </div>
+} @else if (error()) {
+  <div class="container">
+    <mat-card>
+      <mat-card-content class="error-content">
+        <mat-icon color="warn">error_outline</mat-icon>
+        <p>{{ error() }}</p>
+        <button mat-raised-button color="primary" (click)="volver()">
+          <mat-icon>arrow_back</mat-icon>
+          Volver al buscador
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+} @else if (clima()) {
+  <div class="container">
+
+    <div class="header-actions">
+      <button mat-button (click)="volver()">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+
+      <button
+        mat-icon-button
+        [color]="esFavorito() ? 'accent' : ''"
+        (click)="toggleFavorito()"
+        [matTooltip]="esFavorito() ? 'Quitar de favoritos' : 'Agregar a favoritos'">
+        <mat-icon>{{ esFavorito() ? 'star' : 'star_border' }}</mat-icon>
+      </button>
+    </div>
+
+    <!-- Clima principal -->
+    <mat-card class="clima-card">
+      <mat-card-content>
+        <div class="clima-header">
+          <div>
+            <h1>{{ clima()!.name }}, {{ clima()!.sys.country }}</h1>
+            <p class="descripcion">{{ clima()!.weather[0].description }}</p>
+          </div>
+          <img
+            [src]="getIconUrl(clima()!.weather[0].icon)"
+            [alt]="clima()!.weather[0].description"
+            class="clima-icon"
+          />
+        </div>
+
+        <div class="temperatura-principal">
+          {{ clima()!.main.temp | number:'1.0-0' }}°C
+        </div>
+
+        <p class="sensacion">
+          Sensación térmica: {{ clima()!.main.feels_like | number:'1.0-0' }}°C
+        </p>
+
+        <mat-divider />
+
+        <div class="detalles-grid">
+          <div class="detalle-item">
+            <mat-icon>water_drop</mat-icon>
+            <span>Humedad</span>
+            <strong>{{ clima()!.main.humidity }}%</strong>
+          </div>
+          <div class="detalle-item">
+            <mat-icon>air</mat-icon>
+            <span>Viento</span>
+            <strong>{{ clima()!.wind.speed }} m/s</strong>
+          </div>
+          <div class="detalle-item">
+            <mat-icon>compress</mat-icon>
+            <span>Presión</span>
+            <strong>{{ clima()!.main.pressure }} hPa</strong>
+          </div>
+          <div class="detalle-item">
+            <mat-icon>visibility</mat-icon>
+            <span>Visibilidad</span>
+            <strong>{{ (clima()!.visibility / 1000) | number:'1.0-1' }} km</strong>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Pronóstico 5 días -->
+    @if (pronosticoDias().length > 0) {
+      <h2>Pronóstico 5 días</h2>
+      <div class="pronostico-grid">
+        @for (dia of pronosticoDias(); track dia.dt) {
+          <mat-card class="pronostico-card">
+            <mat-card-content>
+              <p class="dia-semana">{{ getDiaSemana(dia.dt) }}</p>
+              <img
+                [src]="getIconUrl(dia.weather[0].icon)"
+                [alt]="dia.weather[0].description"
+                class="pronostico-icon"
+              />
+              <p class="pronostico-temp">{{ dia.main.temp | number:'1.0-0' }}°C</p>
+              <p class="pronostico-desc">{{ dia.weather[0].description }}</p>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    }
+
+  </div>
+}

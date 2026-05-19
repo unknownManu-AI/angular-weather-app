@@ -1,0 +1,125 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.clima-card {
+  margin-bottom: 2rem;
+}
+
+.clima-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.clima-header h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.25rem;
+}
+
+.descripcion {
+  text-transform: capitalize;
+  color: #666;
+  margin: 0;
+}
+
+.clima-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.temperatura-principal {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+  margin: 1rem 0 0.5rem;
+}
+
+.sensacion {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.detalles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.detalle-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detalle-item span {
+  color: #666;
+  font-size: 14px;
+}
+
+.pronostico-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.pronostico-card mat-card-content {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.dia-semana {
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+}
+
+.pronostico-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.pronostico-temp {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+
+.pronostico-desc {
+  font-size: 12px;
+  color: #666;
+  text-transform: capitalize;
+}
+
+.error-content {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error-content mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}

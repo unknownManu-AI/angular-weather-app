@@ -1,0 +1,14 @@
+@if (authService.isAuthenticated()) {
+  <mat-toolbar color="primary">
+    <span>🌤 Clima App</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/clima" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>search</mat-icon>
+      Buscar
+    </a>
+    <span class="usuario">{{ authService.usuario()?.username }}</span>
+    <button mat-icon-button (click)="authService.logout()" matTooltip="Cerrar sesión">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+}
