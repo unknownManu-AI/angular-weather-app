@@ -81,7 +81,8 @@ export class ClimaActualComponent implements OnInit {
         });
         this.cargando.set(false);
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error al cargar clima por ciudad:', err);
         this.error.set('Ciudad no encontrada');
         this.cargando.set(false);
       },
@@ -97,7 +98,8 @@ export class ClimaActualComponent implements OnInit {
         });
         this.cargando.set(false);
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error al cargar clima por coordenadas:', err);
         this.error.set('No se pudo obtener el clima de tu ubicación');
         this.cargando.set(false);
       },
